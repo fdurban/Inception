@@ -1,6 +1,6 @@
 FROM alpine:3.24
 
-RUN apt-get update && apt-get install -y mariadb mariadb-server
+RUN apk update && apk add mariadb mariadb-client
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 EXPOSE 3306
@@ -10,4 +10,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-CMD ["mysqld", "--user=mmysql", "--console" ]
+CMD ["mysqld", "--user=mysql", "--console" ]
