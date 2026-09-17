@@ -1,5 +1,8 @@
 #!/bin/sh
 
+DB_ROOT_PASS=$(cat /run/secrets/db_root_password)
+DB_PASS=$(cat /run/secrets/db_password)
+
 sed -i "s|*.bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 
 sed -i "s|skip-networking|# skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
@@ -17,13 +20,13 @@ if [ ! -d /var/lib/mysql/mysql ] ; then
 
 	mysql -u root <<-EOSQL
 		CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;
-		CREATE USER IF NOT EXISTS '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PASSWORD}';
+		CREATE USER IF NOT EXISTS '${SQL_USER}'@'%' IDENTIFIED BY '${DB_PASS}';
 		GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO '${SQL_USER}'@'%';
-		ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';
+		ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASS}';
 		FLUSH PRIVILEGES;
 EOSQL
 
-	mysqladmin -u root -p"${SQL_ROOT_PASSWORD}" shutdown
+	mysqladmin -u root -p"${DB_ROOT_PASS}" shutdown
 	wait"$pid"
 
 	echo "Mariadb initialization completed"

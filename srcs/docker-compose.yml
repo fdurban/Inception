@@ -1,0 +1,86 @@
+
+services:
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    restart: always
+    env_file: .env
+    networks:
+      - inception
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    secrets:
+      - source: db_root_password
+        uid: '0'
+        gid: '0'
+        mode: 0400
+      - source: db_password
+        uid: '0'
+        gid: '0'
+        mode: 0400
+
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    restart: always
+    env_file: .env
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
+    secrets:
+      - source: db_password
+        uid: '0'
+        gid: '0'
+        mode: 0400
+      - source: wp_admin_password
+        uid: '0'
+        gid: '0'
+        mode: 0400
+      - source: wp_user_password
+        uid: '0'
+        gid: '0'
+        mode: 0400
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    restart: always
+    env_file: .env
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fdurban/data/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/fdurban/data/wordpress
+
+secrets:
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  db_password:
+    file: ../secrets/db_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ../secrets/wp_user_password.txt
