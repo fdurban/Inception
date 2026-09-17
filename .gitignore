@@ -1,4 +1,4 @@
-.env
+srcs/.env
 /data/
 *.crt
 *.key
