@@ -11,13 +11,7 @@ services:
       - mariadb_data:/var/lib/mysql
     secrets:
       - source: db_root_password
-        uid: '0'
-        gid: '0'
-        mode: 0400
       - source: db_password
-        uid: '0'
-        gid: '0'
-        mode: 0400
 
   wordpress:
     build: ./requirements/wordpress
@@ -32,17 +26,8 @@ services:
       - wordpress_data:/var/www/html
     secrets:
       - source: db_password
-        uid: '0'
-        gid: '0'
-        mode: 0400
       - source: wp_admin_password
-        uid: '0'
-        gid: '0'
-        mode: 0400
       - source: wp_user_password
-        uid: '0'
-        gid: '0'
-        mode: 0400
   nginx:
     build: ./requirements/nginx
     container_name: nginx
