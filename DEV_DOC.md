@@ -21,13 +21,13 @@ It defines *names and configuration* only — never passwords.
 
 ### 2.2 Secrets
 Passwords live in `secrets/` **at the repository root** (the compose file references them as `../secrets/...`, one level up from `srcs/`):
-
+```bash
 secrets/
 ├── db_root_password.txt
 ├── db_password.txt
 ├── wp_admin_password.txt
 └── wp_user_password.txt
-
+```
 Rules:
 - Each file contains only the password, no trailing newline.
 - Restrict permissions before deploying:
