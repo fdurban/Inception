@@ -2,7 +2,7 @@
 *This project has been created as part of the 42 curriculum by fdurban-*
 
 # Inception
-#Description
+## Description
 
 The goal of this project is to broaden the understanding of system administration by deploying a standardized, secure, and isolated infrastructure using Docker. It serves as an introduction to Infrastructure as Code (IaC) and microservices architecture.
 
@@ -31,7 +31,7 @@ Using the Host Network binds a container directly to the host machine's network 
 
 
 **Docker Volumes vs Bind Mounts**
-Docker Volumes are fully managed by the Docker daemon and stored in a hidden, abstracted directory on the host. Bind Mounts, which are mandated for this project, map a specific, absolute path on the host system (e.g., `/home/fdurban/data/mariadb`) directly into the container. This approach grants the system administrator absolute physical control over the data's location, inode persistence, and host-level permissions, ensuring data survives even if the containers and Docker network are completely destroyed.
+Docker Volumes are fully managed by the Docker daemon and stored in a hidden, abstracted directory on the host. Bind Mounts, which are mandated for this project, map a specific, absolute path on the host system (e.g., `/home/fdurban-/data/mariadb`) directly into the container. This approach grants the system administrator absolute physical control over the data's location, inode persistence, and host-level permissions, ensuring data survives even if the containers and Docker network are completely destroyed.
 
 
 ---
@@ -43,8 +43,8 @@ Docker Volumes are fully managed by the Docker daemon and stored in a hidden, ab
 ### Prerequisites
 Before orchestrating the cluster, you must intercept the local DNS resolution to route the domain to your localhost.
 1. Edit your host file: `sudo nano /etc/hosts`
-2. Add the following line: `127.0.0.1 fdurban.42.fr`
-3. Ensure the local physical data directories exist: `/home/fdurban/data/mariadb` and `/home/fdurban/data/wordpress`.
+2. Add the following line: `127.0.0.1 fdurban-.42.fr`
+3. Ensure the local physical data directories exist: `/home/fdurban-/data/mariadb` and `/home/fdurban-/data/wordpress`.
 
 
 ### Execution
@@ -69,6 +69,10 @@ The infrastructure is controlled via the `Makefile` located at the root of the r
 - [NGINX FastCGI Proxying](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
 - [Alpine Linux Package Management (apk)](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper)
 - [MariaDB Docker Implementation](https://hub.docker.com/_/mariadb)
+### Other personal resources that I found
+- [Creating a custom MariaDB Image](https://mariadb.com/docs/server/server-management/automated-mariadb-deployment-and-administration/docker-and-mariadb/creating-a-custom-container-image)
+- [TLS Handshake explained](https://www.youtube.com/watch?v=86cQJ0MMses)
+- [Docker networking is crazy](https://www.youtube.com/watch?v=bKFMS5C4CG0)
 
 
 ### AI Usage

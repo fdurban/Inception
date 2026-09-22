@@ -1,6 +1,6 @@
 NAME = inception
 COMPOSE = ./srcs/docker-compose.yml
-DATA_PATH = /home/fdurban/data
+DATA_PATH = /home/fdurban-/data
 
 all: build
 

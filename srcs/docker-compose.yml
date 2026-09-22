@@ -52,13 +52,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/fdurban/data/mariadb
+      device: /home/fdurban-/data/mariadb
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/fdurban/data/wordpress
+      device: /home/fdurban-/data/wordpress
 
 secrets:
   db_root_password:
