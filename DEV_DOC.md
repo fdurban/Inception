@@ -16,13 +16,6 @@ The compose file lives at `srcs/docker-compose.yml` and is invoked via `docker c
 
 ➡️ The `.env` file must be placed at `srcs/.env`, not at the repository root.
 
-```env
-DOMAIN_NAME=fdurban-.42.fr
-MYSQL_DATABASE=wordpress
-MYSQL_USER=wp_user
-WORDPRESS_ADMIN_USER=<admin_username_must_not_contain_admin>
-WORDPRESS_TITLE=Inception
-```
 
 It defines *names and configuration* only — never passwords.
 
